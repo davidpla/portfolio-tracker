@@ -2,6 +2,7 @@ import { useDataStore } from "../store/dataStore"
 import { Pie } from "react-chartjs-2"
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js"
 import { formatCurrency } from "../ui/formatters"
+import styles from './PortfolioChart.module.css'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -11,17 +12,15 @@ export const PortfolioChart = () => {
   if (portfolioChartData && portfolioChartData.chart) {
     groupedData = portfolioChartData.chart
   }
-  //let groupedData = portfolioChartData?.chart //TODO remove this line
 
-  // Prepare data for the Pie chart
   const chartData = {
-    labels: Object.keys(groupedData), // Asset types (e.g., "stock", "crypto", "bond")
+    labels: Object.keys(groupedData),
     datasets: [
       {
         label: "Portfolio Distribution",
-        data: Object.values(groupedData), // Total amounts for each type
+        data: Object.values(groupedData),
         backgroundColor: [
-          "#FF6384", // Color for each type
+          "#FF6384",
           "#36A2EB",
           "#FFCE56",
           "#4BC0C0",
@@ -34,21 +33,11 @@ export const PortfolioChart = () => {
   }
 
   return (
-    <figure
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        textAlign: 'center',
-        alignContent: 'flex-start',
-        width: "90%",
-        maxWidth: "330px",
-        minWidth: '250px',
-        minHeight: '250px'
-      }}>
-      <h2 style={{ paddingBottom: '2rem' }}>Portfolio Chart</h2>
+    <figure className={styles.figure}>
+      <h2 className={styles.title}>Portfolio Chart</h2>
       { chartData && <Pie data={chartData} /> }
       {portfolioChartData && portfolioChartData.total_value && (
-        <div style={{ paddingTop: "2rem", textAlign: "center" }}>
+        <div className={styles.totalValue}>
           <h2>{formatCurrency(portfolioChartData.total_value)}</h2>
         </div>
       )}

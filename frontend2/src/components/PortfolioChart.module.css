@@ -1,0 +1,19 @@
+.figure {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-content: flex-start;
+  width: 90%;
+  max-width: 330px;
+  min-width: 250px;
+  min-height: 250px;
+}
+
+.title {
+  padding-bottom: 2rem;
+}
+
+.totalValue {
+  padding-top: 2rem;
+  text-align: center;
+}

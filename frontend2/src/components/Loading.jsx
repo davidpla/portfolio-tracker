@@ -1,17 +1,25 @@
-export const Loading = () => {
-  
-  return <div 
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '100%',
-      height: '100%',
-      gap: '2rem'
-    }}
-  >    
-    <p style={{ fontSize: '2rem' }}>Loading data...</p>
-  </div>
-}
+import styles from './Loading.module.css'
 
+export const Loading = () => (
+  <div className={styles.loadingContainer}>
+    <svg
+      width="48"
+      height="48"
+      viewBox="0 0 48 48"
+      className={styles.spinner}
+      aria-label="Loading"
+    >
+      <circle
+        cx="24"
+        cy="24"
+        r="20"
+        fill="none"
+        stroke="#00ff99"
+        strokeWidth="4"
+        strokeDasharray="100"
+        strokeDashoffset="60"
+      />
+    </svg>
+    <p className={styles.loadingText}>Loading data...</p>
+  </div>
+)
