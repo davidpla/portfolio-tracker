@@ -13,19 +13,14 @@ const ASSET_TYPES = [
 ]
 
 export const PortfolioHoldings = ({ userId }) => {
-  const { fetchPortfolioFilteredHoldings, portfolioFilteredHoldings, portfolioData, selectedType, setSelectedType } = useDataStore((state) => state)
+  const {fetchPortfolio ,portfolioData, selectedType, setSelectedType } = useDataStore((state) => state)
 
   const handleAssetTypeChange = (event) => {
     const selectedType = event.target.value
     setSelectedType(selectedType)
     console.log('Selected asset type:', selectedType)
-    fetchPortfolioFilteredHoldings(userId, selectedType)
+    fetchPortfolio(userId, selectedType)
   }
-
-  const filteredHoldings = portfolioFilteredHoldings ? portfolioFilteredHoldings : portfolioData?.holdings
-  // const filteredHoldings = selectedType
-  //     ? portfolioData.holdings.filter((item) => item.type === selectedType)
-  //     : portfolioData.holdings
 
   return (
     <div className={styles.container}>
@@ -49,7 +44,6 @@ export const PortfolioHoldings = ({ userId }) => {
       <table className={styles.table}>
         <thead>
           <tr className={styles.tableHeader}>
-            <th className={`${styles.tableCell}`}>Id</th>
             <th className={`${styles.tableCell} ${styles.leftAlign}`}>Asset</th>
             <th className={`${styles.tableCell}`}>Ticker</th>
             <th className={`${styles.tableCell}`}>Type</th>
@@ -58,14 +52,13 @@ export const PortfolioHoldings = ({ userId }) => {
           </tr>
         </thead>
         <tbody>
-          {filteredHoldings.map((item, index) => (
+          {portfolioData?.map((item, index) => (
             <tr key={index}>
-              <td className={`${styles.tableCell}`}>{item.id || '#'}</td>
               <td className={`${styles.tableCell} ${styles.leftAlign}`}>{item.name || 'Unknown'}</td>
               <td className={`${styles.tableCell}`}>{item.ticker || 'Unknown'}</td>
               <td className={`${styles.tableCell}`}>{item.type || 'N/A'}</td>
               <td className={`${styles.tableCell}`}>{item.percentage || 0}%</td>
-              <td className={`${styles.tableCell} ${styles.rightAlign}`}>{formatCurrency(item.amount) || formatCurrency(0)}</td>
+              <td className={`${styles.tableCell} ${styles.rightAlign}`}>{formatCurrency(item.value) || formatCurrency(0)}</td>
             </tr>
           ))}
         </tbody>

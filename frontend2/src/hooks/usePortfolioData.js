@@ -18,7 +18,8 @@ export function usePortfolioData({filter}) {
       setError(null)
       
       try {
-        const portfolioData = await fetchPortfolioData()        
+        const portfolioData = await fetchPortfolioData()
+        console.log('portfolioData', portfolioData)
         setData(portfolioData)
         
       } catch (err) {
