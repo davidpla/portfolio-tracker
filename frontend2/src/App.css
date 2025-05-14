@@ -61,7 +61,6 @@
   padding: 1rem;
 }
 
-
 .chartArticle {
   flex: 6;
   display: flex;
@@ -129,6 +128,7 @@
   .holdingsArticle {
     margin-left: 0rem;
     min-width: 677px;
+    min-height: 444px;
   }
 
   .chartArticle {    
