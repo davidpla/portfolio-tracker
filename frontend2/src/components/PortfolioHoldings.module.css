@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 520px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative; /* Allow positioning of the select */
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    flex: 1; 
+}
+
+.select {
+    position: absolute; /* Position the select element */
+    right: 0; /* Align the select to the right */
+    padding: 8px;
+    font-size: 1rem;
+    width: 120px;
+    border: 2px solid rgb(0, 255, 153, 0.1);
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+}
+
+.select:focus {
+    outline: none;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.tableHeader {
+    background-color: #333;
+    text-align: center;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.tableCell {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.rightAlign {
+    text-align: right;
+}
+
+.leftAlign {
+    text-align: left;
+}

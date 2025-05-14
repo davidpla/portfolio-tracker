@@ -1,0 +1,99 @@
+.appContainer {
+    width: 100%;
+    height: 100%;
+    background-color: #121212;
+    color: #ffffff;
+    background-image: url(/bg_swap.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 900px;
+}
+
+.headerSection {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 2rem 1rem;
+}
+
+.headerTitle {
+    flex: 1;
+    text-align: left;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00ff99;
+    white-space: nowrap;
+    padding-right: 1rem;
+}
+
+.searchInput {
+    display: flex;
+    flex: 1;
+    text-align: right;
+    justify-content: flex-end;
+    max-width: 160px;
+    padding: 8px 8px 6px 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid rgb(0, 255, 153, 0.1);
+    border-radius: 4px;
+    outline: none;
+}
+
+.mainSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 90vh;
+    padding: 1rem;
+}
+
+.chartArticle {
+    flex: 6;
+    display: flex;
+    align-content: flex-start;
+    justify-content: center;
+    margin-right: 1rem;
+    background-color: rgba(30, 30, 30, 0.98);
+    border-radius: 10px;
+    border: 2px solid rgb(0, 255, 153, 0.1);
+    padding: 1rem;
+    max-height: 500px;
+}
+
+.holdingsArticle {
+    flex: 10;
+    background-color: rgba(30, 30, 30, 0.98);
+    border-radius: 10px;
+    border: 2px solid rgb(0, 255, 153, 0.1);
+    padding: 1rem;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.holdingsArticle::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.holdingsArticle::-webkit-scrollbar-track {
+    background: #000;
+}
+
+.holdingsArticle::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+    border: 2px solid #bbb;
+}
+
+.holdingsArticle::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.holdingsArticle::-webkit-scrollbar-corner {
+    background: #888;
+}
