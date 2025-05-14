@@ -34,6 +34,7 @@ The application uses the port 4000 by default: http://localhost:4000.
 
 ### Application features:
 - The app allows to inidcate a User ID in the top-right input text in order to fetch their data. IDs 1 and 2 have data.
+    - Debounced applied to avoid multiple fetches to the Backend.
 - The panel displays a pie chart with the total holdings of the selected user. This panel is refreshed only when a new User ID is searched.
 - The rught panel displays a table with all assets of the selected User ID. 
     - There is a selector that allows to filter the Assets by Type. When this selector is used, the app triggers fetchs new data for this component.
