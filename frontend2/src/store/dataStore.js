@@ -1,31 +1,30 @@
 import { create } from 'zustand'
-import { fetchPortfolioData } from '../services/api'
+import { fetchPortfolioData, fetchPortfolioChartData } from '../services/api'
 
 export const useDataStore = create((set) => ({
   loading: false,
   error: null,
-  portfolioData: null, // {totalValue, holdings: []}
-  portfolioFilteredHoldings: null, // filteredHoldings: []
+  portfolioData: null, // {ticker: string, name: string, type: string, value: number, percetage: number }:[]
+  portfolioChartData: null, // {totalValue: number, chart: {} }
   selectedType: '',
   setLoading: () => set({ loading: true, error: null }),
   setError: (error) => set({ error, loading: false, portfolioData: null }),
   setSelectedType: (type) => set({ selectedType: type }),
-  fetchPortfolio: async (userId) => {
+  fetchPortfolio: async (userId, assetType) => {
     set({ loading: true, error: null, portfolioData: null })
     try {
-      const data = await fetchPortfolioData(userId)
+      const data = await fetchPortfolioData(userId, assetType)
       set({ portfolioData: data, loading: false })
     } catch (error) {
       set({ error: error.message, loading: false })
     }
   },
 
-  fetchPortfolioFilteredHoldings: async (userId, assetType) => {
-    set({ loading: true, error: null, portfolioFilteredHoldings: null })
+  fetchPortfolioChart: async (userId) => {
+    set({ loading: true, error: null, portfolioChartData: null })
     try {      
-      const data = await fetchPortfolioData(userId, assetType)
-      const filteredHoldings = data?.filteredHoldings
-      set({ portfolioFilteredHoldings: filteredHoldings, loading: false })
+      const data = await fetchPortfolioChartData(userId)
+      set({ portfolioChartData: data, loading: false })
     } catch (error) {
       set({ error: error.message, loading: false })
     }

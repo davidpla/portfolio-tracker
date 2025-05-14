@@ -1,8 +1,11 @@
 import express, { Request, Response } from 'express';
+import cors from 'cors';
 import { HOLDINGS, ASSETS, ASSET_TYPES, AssetType } from './data';
 
 const app = express();
 const port = 4001;
+app.use(cors());
+
 
 app.get('/status', (_req: Request, res: Response) => {
   res.send('OK');
@@ -86,11 +89,13 @@ app.get('/portfolio/chart', (req: Request, res: Response) => {
     }
   }
 
-  const chart: Record<AssetType, number> = {} as any;
+  const chart: Partial<Record<AssetType, number>> = {};
 
   for (const type of ASSET_TYPES) {
     const value = typeTotals[type];
-    chart[type] = totalValue ? parseFloat(((value / totalValue) * 100).toFixed(2)) : 0;
+    if (value > 0) {
+      chart[type] = totalValue ? parseFloat(((value / totalValue) * 100).toFixed(2)) : 0;
+    }
   }
 
   return res.json({

@@ -8,7 +8,7 @@ import { PortfolioHoldings } from './components/PortfolioHoldings'
 import { PortfolioChart } from './components/PortfolioChart'
 
 export default function PortfolioTracker() {
-  const {loading, error, fetchPortfolio, portfolioData} = useDataStore((state) => state)
+  const {loading, error, fetchPortfolio, fetchPortfolioChart, portfolioData, portfolioChartData} = useDataStore((state) => state)
   const [userId, setUserId] = useState('')
   const [debouncedUserId, setDebouncedUserId] = useState('') 
 
@@ -16,7 +16,8 @@ export default function PortfolioTracker() {
     if (!debouncedUserId) return
 
     fetchPortfolio(debouncedUserId)
-  }, [fetchPortfolio, debouncedUserId])
+    fetchPortfolioChart(debouncedUserId)
+  }, [fetchPortfolio, fetchPortfolioChart, debouncedUserId])
 
    // Debounce userId
   useEffect(() => {
@@ -61,23 +62,26 @@ export default function PortfolioTracker() {
       </section>
 
       <section className="mainSection">
+        <div className="articlesContainer">
+          {portfolioChartData && !error && (
+            <>
+              <article className="chartArticle">
+                <PortfolioChart />
+              </article>
+          
+              <article className="holdingsArticle">
+                <PortfolioHoldings userId={debouncedUserId}/>
+              </article>
+            </>
+          )}
+        </div>
+
         {loading && <Loading />}
         {error && <FetchError message={error} />}
         {!loading && !error && !portfolioData && <NoData userId={debouncedUserId} />}
-
-        {/* {portfolioData && portfolioData.holdings && Array.isArray(portfolioData.holdings) && portfolioData.holdings.length > 0 && ( */}
-        {portfolioData  && (
-          <>
-            <article className="chartArticle">
-              <PortfolioChart />
-            </article>
-
-            <article className="holdingsArticle">
-              <PortfolioHoldings userId={debouncedUserId}/>
-            </article>
-          </>
-        )}
       </section>
+      
+      
     </div>
   )
 }
