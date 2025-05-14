@@ -15,9 +15,13 @@ app.get('/status', (_req: Request, res: Response) => {
 app.get('/portfolio', (req: Request, res: Response) => {
   const userId = req.query.user_id as string;
   const assetType = req.query.asset_type as string | undefined;
-
-  if (!userId || !(userId in HOLDINGS)) {
+  
+  if (!userId) {
     return res.status(400).json({ error: "Invalid or missing user_id" });
+  }
+
+  if (!(userId in HOLDINGS)) {
+    return res.status(404).json({ error: "User not found" });
   }
 
   if (assetType && !ASSET_TYPES.has(assetType as AssetType)) {
@@ -25,6 +29,10 @@ app.get('/portfolio', (req: Request, res: Response) => {
   }
 
   const userHoldings = HOLDINGS[userId];
+  if (!userHoldings) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+  
   const aggregated: Record<string, number> = {};
 
   for (const wallet of Object.values(userHoldings)) {

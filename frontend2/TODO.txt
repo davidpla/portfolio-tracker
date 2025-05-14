@@ -1,7 +1,4 @@
-- check store structure
-- move styles to modules.css
+- tests
+- readme: how to install, api_url/mock, network_error_mock
 - memoize?
 - pagination
-- tests
-- create backend
-- readme: how to install, api_url/mock, network_error_mock

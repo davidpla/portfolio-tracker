@@ -24,25 +24,6 @@ export const ASSET_TYPES: Set<AssetType> = new Set([
   "real_estate",
 ]);
 
-// export const HOLDINGS: HoldingsMap = {
-//   user_1: {
-//     wallet_1: [
-//       { asset_id: "asset_1", amount: 37653 },
-//       { asset_id: "asset_2", amount: 746 },
-//     ],
-//     wallet_2: [
-//       { asset_id: "asset_1", amount: 4376 },
-//       { asset_id: "asset_3", amount: 7348 },
-//     ],
-//   },
-//   user_2: {
-//     wallet_4: [
-//       { asset_id: "asset_1", amount: 8553 },
-//       { asset_id: "asset_3", amount: 234 },
-//     ],
-//   },
-// };
-
 export const HOLDINGS: HoldingsMap = {
   user_1: {
     wallet_1: [
@@ -121,13 +102,6 @@ export const HOLDINGS: HoldingsMap = {
     ],
   },
 };
-
-
-// export const ASSETS: Record<string, Asset> = {
-//   asset_1: { ticker: "BTC", name: "Bitcoin", type: "crypto" },
-//   asset_2: { ticker: "ETH", name: "Ethereum", type: "crypto" },
-//   asset_3: { ticker: "AAPL", name: "Apple", type: "stock" },
-// };
 
 export const ASSETS: Record<string, Asset> = {
   asset_1: { ticker: "BTC", name: "Bitcoin", type: "crypto" },

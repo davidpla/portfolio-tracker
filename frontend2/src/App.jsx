@@ -1,7 +1,7 @@
 import './App.css'
+import { toast, Toaster } from 'sonner'
 import { useDataStore } from './store/dataStore'
 import { Loading } from './components/Loading'
-import { FetchError } from './components/FetchError'
 import { NoData } from './components/NoData'
 import { useEffect, useState } from 'react'
 import { PortfolioHoldings } from './components/PortfolioHoldings'
@@ -14,10 +14,13 @@ export default function PortfolioTracker() {
 
   useEffect(() => {
     if (!debouncedUserId) return
-
     fetchPortfolio(debouncedUserId)
-    fetchPortfolioChart(debouncedUserId)
-  }, [fetchPortfolio, fetchPortfolioChart, debouncedUserId])
+  }, [fetchPortfolio, debouncedUserId])
+
+  useEffect(() => {
+    if (!debouncedUserId) return
+      fetchPortfolioChart(debouncedUserId)
+  }, [fetchPortfolioChart, debouncedUserId])
 
    // Debounce userId
   useEffect(() => {
@@ -36,53 +39,56 @@ export default function PortfolioTracker() {
 
   // Handle error: clear input and focus on it
   useEffect(() => {
-    if (error) {
+    if (error) {      
       setUserId('')
+      console.error('TOAST: Error fetching data:', error)
+      toast.error(error, { className: 'toastError' })
     }
   }, [error])
   
   return (
-    <div className="appContainer">
-      <section className="headerSection">
-        <div>
-          <h1 className="headerTitle">AssetDash Portfolio Tracker</h1>
-        </div>
+    <>
+      <div className="appContainer">
+        <section className="headerSection">
+          <div>
+            <h1 className="headerTitle">AssetDash Portfolio Tracker</h1>
+          </div>
 
-        <div>
-          <input
-            type="text"
-            placeholder="Search by User ID"
-            value={userId}
-            onChange={handleUserIdChange}
-            onClick={(e) => e.target.select()}
-            maxLength={15}
-            className="searchInput"
-          />
-        </div>
-      </section>
+          <div>
+            <input
+              type="text"
+              placeholder="Search by User ID"
+              value={userId}
+              onChange={handleUserIdChange}
+              onClick={(e) => e.target.select()}
+              maxLength={15}
+              className="searchInput"
+            />
+          </div>
+        </section>
 
-      <section className="mainSection">
-        <div className="articlesContainer">
-          {portfolioChartData && !error && (
-            <>
-              <article className="chartArticle">
-                <PortfolioChart />
-              </article>
-          
-              <article className="holdingsArticle">
-                <PortfolioHoldings userId={debouncedUserId}/>
-              </article>
-            </>
-          )}
-        </div>
+        <section className="mainSection">
+          <div className="articlesContainer">
+            {portfolioChartData && !error && (
+              <>
+                <article className="chartArticle">
+                  <PortfolioChart />
+                </article>
+            
+                <article className="holdingsArticle">
+                  <PortfolioHoldings userId={debouncedUserId}/>
+                </article>
+              </>
+            )}
+          </div>
 
-        {loading && <Loading />}
-        {error && <FetchError message={error} />}
-        {!loading && !error && !portfolioData && <NoData userId={debouncedUserId} />}
-      </section>
-      
-      
-    </div>
+          {loading && <Loading />}
+          {!loading && !portfolioData && !portfolioChartData && <NoData />}
+        </section>              
+      </div>
+
+      <Toaster />
+    </>
   )
 }
 

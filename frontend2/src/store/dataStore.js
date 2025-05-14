@@ -2,11 +2,11 @@ import { create } from 'zustand'
 import { fetchPortfolioData, fetchPortfolioChartData } from '../services/api'
 
 export const useDataStore = create((set) => ({
-  loading: false,
-  error: null,
+  loading: false, // boolean
+  error: null, // string message
   portfolioData: null, // {ticker: string, name: string, type: string, value: number, percetage: number }:[]
   portfolioChartData: null, // {totalValue: number, chart: {} }
-  selectedType: '',
+  selectedType: '', // string asset type
   setLoading: () => set({ loading: true, error: null }),
   setError: (error) => set({ error, loading: false, portfolioData: null }),
   setSelectedType: (type) => set({ selectedType: type }),
