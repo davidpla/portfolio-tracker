@@ -26,5 +26,3 @@ dist-ssr
 # Environment files
 .env
 .env.local
-
-node_modules
