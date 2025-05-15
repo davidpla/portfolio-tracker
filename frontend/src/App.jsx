@@ -5,7 +5,7 @@ import { Loading } from './components/Loading'
 import { NoData } from './components/NoData'
 import { useEffect, useState } from 'react'
 import { PortfolioHoldings } from './components/PortfolioHoldings'
-import { PortfolioChart } from './components/PortfolioChart'
+import { PortfolioChart } from './components/PortfolioChart/PortfolioChart'
 
 export default function PortfolioTracker() {
   const {loading, error, fetchPortfolio, fetchPortfolioChart, portfolioData, portfolioChartData} = useDataStore((state) => state)
