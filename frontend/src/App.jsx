@@ -4,7 +4,7 @@ import { useDataStore } from './store/dataStore'
 import { Loading } from './components/Loading'
 import { NoData } from './components/NoData'
 import { useEffect, useState } from 'react'
-import { PortfolioHoldings } from './components/PortfolioHoldings'
+import { PortfolioHoldings } from './components/PortfolioHoldings/PortfolioHoldings'
 import { PortfolioChart } from './components/PortfolioChart/PortfolioChart'
 
 export default function PortfolioTracker() {
@@ -37,10 +37,8 @@ export default function PortfolioTracker() {
     setUserId(event.target.value)
   }
 
-  // Handle error: clear input and focus on it
   useEffect(() => {
     if (error) {      
-      // setUserId('')
       toast.error(error, { className: 'toastError' })
     }
   }, [error])

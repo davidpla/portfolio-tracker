@@ -1,8 +1,9 @@
+import React from 'react' // ✅ Required for JSX in this context
 import { useMemo, useState } from 'react'
-import { useDataStore } from '../store/dataStore'
-import { formatAssetType, formatCurrency } from '../ui/formatters'
+import { useDataStore } from '../../store/dataStore'
+import { formatAssetType, formatCurrency } from '../../ui/formatters'
 import styles from './PortfolioHoldings.module.css'
-import { ASSET_TYPES } from '../constants/assetTypes'
+import { ASSET_TYPES } from '../../constants/assetTypes'
 
 export const PortfolioHoldings = ({ userId }) => {
   const {fetchPortfolio ,portfolioData, selectedType, setSelectedType } = useDataStore((state) => state)

@@ -43,7 +43,8 @@ export default [
     },
     languageOptions: {
       globals: {
-        ...globals.jest
+        ...globals.jest,
+        global: 'readonly',
       }
     },
     rules: {
