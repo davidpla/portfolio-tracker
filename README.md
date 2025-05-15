@@ -3,7 +3,7 @@
 This repository contains 2 projects to implment an App portfolio tracker.
 To start clone in your local this repository with:
 ```
-git@github.com:davidpla/portfolio-tracker.git
+git clone git@github.com:davidpla/portfolio-tracker.git
 cd portfolio-tracker
 ```
 
