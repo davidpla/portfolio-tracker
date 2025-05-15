@@ -1,3 +1,4 @@
+import jestPlugin from 'eslint-plugin-jest'
 import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
@@ -35,4 +36,18 @@ export default [
       'no-extra-semi': 'error',
     },
   },
+  {
+    files: ['**/*.test.{js,jsx}', '**/__tests__/**/*.{js,jsx}'],
+    plugins: {
+      jest: jestPlugin
+    },
+    languageOptions: {
+      globals: {
+        ...globals.jest
+      }
+    },
+    rules: {
+      ...jestPlugin.configs.recommended.rules
+    }
+  }
 ]
