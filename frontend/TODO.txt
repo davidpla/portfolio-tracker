@@ -1,4 +1,0 @@
-- tests
-- readme: how to install, api_url/mock, network_error_mock
-- memoize?
-- pagination

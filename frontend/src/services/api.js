@@ -2,10 +2,10 @@
 import { API_URL } from "../config"
 
 export const fetchPortfolioData = (userId, assetType) => {
-  console.log('fetching fetchPortfolioData from backend. URL: ', API_URL)
+  console.log('fetching Holdings Data from backend.')
 
   return new Promise((resolve, reject) => {
-    const params = new URLSearchParams({ user_id: `user_${userId}` })
+    const params = new URLSearchParams({ user_id: `${userId}` })
     if (assetType) {
       params.append("asset_type", assetType)
     }
@@ -30,10 +30,10 @@ export const fetchPortfolioData = (userId, assetType) => {
 
 
 export const fetchPortfolioChartData = (userId) => {
-  console.log('fetching fetchPortfolioChartData from backend. URL: ', API_URL)
+  console.log('fetching Chart Data from backend.')
 
   return new Promise((resolve, reject) => {
-    const params = new URLSearchParams({ user_id: `user_${userId}` })
+    const params = new URLSearchParams({ user_id: `${userId}` })
 
     fetch(`${API_URL}/portfolio/chart?${params.toString()}`)
       .then((response) => {

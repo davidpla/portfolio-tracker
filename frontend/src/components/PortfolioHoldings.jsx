@@ -1,16 +1,8 @@
 //import { useState } from 'react'
 import { useDataStore } from '../store/dataStore'
-import { formatCurrency } from '../ui/formatters'
+import { formatAssetType, formatCurrency } from '../ui/formatters'
 import styles from './PortfolioHoldings.module.css'
-
-const ASSET_TYPES = [
-  'stock',
-  'bond',
-  'crypto',
-  'nft',
-  'defi',
-  'real_estate',
-]
+import { ASSET_TYPES } from '../constants/assetTypes'
 
 export const PortfolioHoldings = ({ userId }) => {
   const {fetchPortfolio ,portfolioData, selectedType, setSelectedType } = useDataStore((state) => state)
@@ -18,7 +10,6 @@ export const PortfolioHoldings = ({ userId }) => {
   const handleAssetTypeChange = (event) => {
     const selectedType = event.target.value
     setSelectedType(selectedType)
-    console.log('Selected asset type:', selectedType)
     fetchPortfolio(userId, selectedType)
   }
 
@@ -56,7 +47,7 @@ export const PortfolioHoldings = ({ userId }) => {
             <tr key={index}>
               <td className={`${styles.tableCell} ${styles.leftAlign}`}>{item.name || 'Unknown'}</td>
               <td className={`${styles.tableCell}`}>{item.ticker || 'Unknown'}</td>
-              <td className={`${styles.tableCell}`}>{item.type || 'N/A'}</td>
+              <td className={`${styles.tableCell}`}>{formatAssetType(item.type) || 'N/A'}</td>
               <td className={`${styles.tableCell}`}>{item.percentage || 0}%</td>
               <td className={`${styles.tableCell} ${styles.rightAlign}`}>{formatCurrency(item.value) || formatCurrency(0)}</td>
             </tr>

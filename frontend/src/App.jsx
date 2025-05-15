@@ -25,11 +25,11 @@ export default function PortfolioTracker() {
    // Debounce userId
   useEffect(() => {
     const handler = setTimeout(() => {
-      setDebouncedUserId(userId) // Update debounced userId after 0.5 seconds
-    }, 500)
+      setDebouncedUserId(userId) // Update debounced userId after 0.6 seconds
+    }, 700)
 
     return () => {
-      clearTimeout(handler) // Clear timeout if userId changes before 0.5 seconds
+      clearTimeout(handler) // Clear timeout if userId changes before 0.6 seconds
     }
   }, [userId])
   
@@ -40,8 +40,7 @@ export default function PortfolioTracker() {
   // Handle error: clear input and focus on it
   useEffect(() => {
     if (error) {      
-      setUserId('')
-      console.error('TOAST: Error fetching data:', error)
+      // setUserId('')
       toast.error(error, { className: 'toastError' })
     }
   }, [error])
