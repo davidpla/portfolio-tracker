@@ -1,4 +1,4 @@
-//import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useDataStore } from '../store/dataStore'
 import { formatAssetType, formatCurrency } from '../ui/formatters'
 import styles from './PortfolioHoldings.module.css'
@@ -6,11 +6,45 @@ import { ASSET_TYPES } from '../constants/assetTypes'
 
 export const PortfolioHoldings = ({ userId }) => {
   const {fetchPortfolio ,portfolioData, selectedType, setSelectedType } = useDataStore((state) => state)
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' })
 
   const handleAssetTypeChange = (event) => {
     const selectedType = event.target.value
     setSelectedType(selectedType)
     fetchPortfolio(userId, selectedType)
+  }
+
+  // Sorting logic
+  const sortedData = useMemo(() => {
+    if (!portfolioData) return []
+    if (!sortConfig.key) return portfolioData
+
+    const sorted = [...portfolioData].sort((a, b) => {
+      let aValue = a[sortConfig.key]
+      let bValue = b[sortConfig.key]
+
+      // For formatted columns, handle undefined/null and string comparison
+      if (aValue === undefined || aValue === null) aValue = ''
+      if (bValue === undefined || bValue === null) bValue = ''
+
+      if (typeof aValue === 'string') aValue = aValue.toLowerCase()
+      if (typeof bValue === 'string') bValue = bValue.toLowerCase()
+
+      if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1
+      if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1
+      return 0
+    })
+    return sorted
+  }, [portfolioData, sortConfig])
+
+  const handleSort = (key) => {
+    setSortConfig((prev) => {
+      if (prev.key === key) {
+        // Toggle direction
+        return { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' }
+      }
+      return { key, direction: 'asc' }
+    })
   }
 
   return (
@@ -34,16 +68,16 @@ export const PortfolioHoldings = ({ userId }) => {
 
       <table className={styles.table}>
         <thead>
-          <tr className={styles.tableHeader}>
-            <th className={`${styles.tableCell} ${styles.leftAlign}`}>Asset</th>
-            <th className={`${styles.tableCell}`}>Ticker</th>
-            <th className={`${styles.tableCell}`}>Type</th>
-            <th className={`${styles.tableCell}`}>Percentage (%)</th>
-            <th className={`${styles.tableCell} ${styles.rightAlign}`}>Amount ($)</th>
+          <tr className={`${styles.tableHeader} ${styles.cursorPointer}`}>
+            <th className={`${styles.tableCell} ${styles.leftAlign}`} onClick={() => handleSort('name')}>Asset</th>
+            <th className={styles.tableCell} onClick={() => handleSort('ticker')}>Ticker</th>
+            <th className={styles.tableCell} onClick={() => handleSort('type')}>Type</th>
+            <th className={styles.tableCell} onClick={() => handleSort('percentage')}>Percentage (%)</th>
+            <th className={`${styles.tableCell} ${styles.rightAlign}`} onClick={() => handleSort('value')}>Amount ($)</th>
           </tr>
         </thead>
         <tbody>
-          {portfolioData?.map((item, index) => (
+          {sortedData?.map((item, index) => (
             <tr key={index}>
               <td className={`${styles.tableCell} ${styles.leftAlign}`}>{item.name || 'Unknown'}</td>
               <td className={`${styles.tableCell}`}>{item.ticker || 'Unknown'}</td>

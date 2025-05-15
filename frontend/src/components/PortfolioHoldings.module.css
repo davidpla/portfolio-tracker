@@ -3,6 +3,31 @@
     flex-direction: column;
     width: 100%;
     min-width: 520px;
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.container::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+  border: 2px solid #bbb;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.container::-webkit-scrollbar-corner {
+  background: #888;
 }
 
 .header {
@@ -61,4 +86,9 @@
 
 .leftAlign {
     text-align: left;
+}
+
+.cursorPointer {
+    cursor: pointer;
+    user-select: none;
 }
