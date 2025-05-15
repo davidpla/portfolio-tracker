@@ -1,7 +1,7 @@
 import { useDataStore } from "../store/dataStore"
 import { Pie } from "react-chartjs-2"
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js"
-import { formatCurrency } from "../ui/formatters"
+import { formatAssetType, formatCurrency } from "../ui/formatters"
 import styles from './PortfolioChart.module.css'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
@@ -10,7 +10,9 @@ export const PortfolioChart = () => {
   const { portfolioChartData } = useDataStore((state) => state)
   let groupedData = {}
   if (portfolioChartData && portfolioChartData.chart) {
-    groupedData = portfolioChartData.chart
+    groupedData = Object.fromEntries(
+      Object.entries(portfolioChartData.chart).map(([key, value]) => [formatAssetType(key), value])
+    )
   }
 
   const chartData = {
