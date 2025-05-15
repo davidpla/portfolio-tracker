@@ -21,9 +21,8 @@ npm run dev
 The application uses the port 4001 by default: http://localhost:4001
 
 ### Example of endpoints calls
-http://localhost:4001/portfolio/chart?user_id=user_1
-http://localhost:4001/portfolio?user_id=user_1&asset_type=crypto
-
+* http://localhost:4001/portfolio/chart?user_id=user_1
+* http://localhost:4001/portfolio?user_id=user_1&asset_type=crypto
 
 
 ## Frontend (React 19 + Vite):
