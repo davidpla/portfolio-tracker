@@ -1,94 +1,109 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-width: 520px;
-    max-height: 450px;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 520px;
+  max-height: 450px;
+
 }
 
-.container::-webkit-scrollbar {
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  /* Allow positioning of the select */
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+}
+
+.select {
+  position: absolute;
+  /* Position the select element */
+  right: 0;
+  /* Align the select to the right */
+  padding: 8px;
+  font-size: 1rem;
+  width: 120px;
+  border: 2px solid rgb(0, 255, 153, 0.05);
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+}
+
+.select:focus {
+  outline: none;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  background-color: #333;
+  text-align: center;
+  color: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  z-index: 2;
+}
+
+.tableWrapper {
+  margin-top: 1rem;
+  max-height: 450px;
+  overflow-y: auto;
+  width: 100%;
+  /* Optional: to keep header visible while scrolling */
+  display: block;
+}
+
+.tableWrapper::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
-.container::-webkit-scrollbar-track {
+.tableWrapper::-webkit-scrollbar-track {
   background: #000;
 }
 
-.container::-webkit-scrollbar-thumb {
+.tableWrapper::-webkit-scrollbar-thumb {
   background-color: #888;
   border-radius: 4px;
   border: 2px solid #bbb;
 }
 
-.container::-webkit-scrollbar-thumb:hover {
+.tableWrapper::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
 
-.container::-webkit-scrollbar-corner {
+.tableWrapper::-webkit-scrollbar-corner {
   background: #888;
 }
 
-.header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: relative; /* Allow positioning of the select */
-    margin-bottom: 1rem;
-}
-
-.title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    flex: 1; 
-}
-
-.select {
-    position: absolute; /* Position the select element */
-    right: 0; /* Align the select to the right */
-    padding: 8px;
-    font-size: 1rem;
-    width: 120px;
-    border: 2px solid rgb(0, 255, 153, 0.1);
-    border-radius: 4px;
-    background-color: #333;
-    color: #fff;
-}
-
-.select:focus {
-    outline: none;
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-.tableHeader {
-    background-color: #333;
-    text-align: center;
-    color: #fff;
-    white-space: nowrap;
-}
-
 .tableCell {
-    padding: 8px;
-    border-bottom: 1px solid #ccc;
-    text-align: center;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
 }
 
 .rightAlign {
-    text-align: right;
+  text-align: right;
 }
 
 .leftAlign {
-    text-align: left;
-}
-
-.cursorPointer {
-    cursor: pointer;
-    user-select: none;
+  text-align: left;
 }

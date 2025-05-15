@@ -66,28 +66,30 @@ export const PortfolioHoldings = ({ userId }) => {
         </select>
       </div>
 
-      <table className={styles.table}>
-        <thead>
-          <tr className={`${styles.tableHeader} ${styles.cursorPointer}`}>
-            <th className={`${styles.tableCell} ${styles.leftAlign}`} onClick={() => handleSort('name')}>Asset</th>
-            <th className={styles.tableCell} onClick={() => handleSort('ticker')}>Ticker</th>
-            <th className={styles.tableCell} onClick={() => handleSort('type')}>Type</th>
-            <th className={styles.tableCell} onClick={() => handleSort('percentage')}>Percentage (%)</th>
-            <th className={`${styles.tableCell} ${styles.rightAlign}`} onClick={() => handleSort('value')}>Amount ($)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedData?.map((item, index) => (
-            <tr key={index}>
-              <td className={`${styles.tableCell} ${styles.leftAlign}`}>{item.name || 'Unknown'}</td>
-              <td className={`${styles.tableCell}`}>{item.ticker || 'Unknown'}</td>
-              <td className={`${styles.tableCell}`}>{formatAssetType(item.type) || 'N/A'}</td>
-              <td className={`${styles.tableCell}`}>{item.percentage || 0}%</td>
-              <td className={`${styles.tableCell} ${styles.rightAlign}`}>{formatCurrency(item.value) || formatCurrency(0)}</td>
+      <div className={styles.tableWrapper}>
+        <table className={styles.table}>
+          <thead>
+            <tr className={`${styles.tableHeader}`}>
+              <th className={`${styles.tableCell} ${styles.leftAlign} ${styles.stickyHeader}`} onClick={() => handleSort('name')}>Asset</th>
+              <th className={`${styles.tableCell} ${styles.stickyHeader}`} onClick={() => handleSort('ticker')}>Ticker</th>
+              <th className={`${styles.tableCell} ${styles.stickyHeader}`} onClick={() => handleSort('type')}>Type</th>
+              <th className={`${styles.tableCell} ${styles.stickyHeader}`} onClick={() => handleSort('percentage')}>Percentage (%)</th>
+              <th className={`${styles.tableCell} ${styles.rightAlign} ${styles.stickyHeader}`} onClick={() => handleSort('value')}>Amount ($)</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sortedData?.map((item, index) => (
+              <tr key={index}>
+                <td className={`${styles.tableCell} ${styles.leftAlign}`}>{item.name || 'Unknown'}</td>
+                <td className={`${styles.tableCell}`}>{item.ticker || 'Unknown'}</td>
+                <td className={`${styles.tableCell}`}>{formatAssetType(item.type) || 'N/A'}</td>
+                <td className={`${styles.tableCell}`}>{item.percentage || 0}%</td>
+                <td className={`${styles.tableCell} ${styles.rightAlign}`}>{formatCurrency(item.value) || formatCurrency(0)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
