@@ -12,7 +12,7 @@ cd portfolio-tracker
 
 ## Backend (Node.js 22)
 
-A simple Node.js app using Express that provides endpoints with hardcoded data to feed the Frontend app.
+A simple Node.js app with Typescript using Express that provides endpoints with hardcoded data to feed the Frontend app.
 
 ### Getting Started
 
@@ -35,7 +35,7 @@ The backend runs on port `4001` by default: [http://localhost:4001](http://local
 
 ## Frontend (React 19 + Vite)
 
-A React 19 + Vite app that provides a user interface for viewing portfolio data.
+A React 19 + Vite app with Javascript that provides a user interface for viewing portfolio data.
 
 ### Getting Started
 
